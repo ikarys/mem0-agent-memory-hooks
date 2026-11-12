@@ -1,0 +1,23 @@
+{
+  "color": "red",
+  "label": "vibecoding",
+  "message": "level 1 · checked 2026-11-12 · HEAD",
+  "schemaVersion": 1,
+  "vibecoding": {
+    "checked_by": "vibecheck 0.4.0",
+    "commit": "HEAD",
+    "date": "2026-11-12",
+    "evidence": {},
+    "level": 1,
+    "metrics": {},
+    "open_findings": {
+      "BLOCKER": 0,
+      "DOC-WRONG": 0,
+      "MINOR": 0,
+      "PAINFUL": 0
+    },
+    "read_by": null,
+    "report": null,
+    "verdict": "fail"
+  }
+}
