@@ -60,10 +60,20 @@ Export `MEM0_LITELLM_KEY` (the LiteLLM virtual key already used for the mem0 MCP
 ## Agents
 
 - Claude Code: supported now through the `UserPromptSubmit` hook.
+- fennec: supported through a skill, see below.
 - opencode: planned as a TypeScript plugin calling `mem0-recall search`.
-- fennec: planned to link the crate.
 
-Each planned agent will get a folder `adapters/<agent>/`.
+Each agent other than Claude Code gets a folder `adapters/<agent>/`.
+
+### fennec
+
+fennec's source stays free of anything mem0-specific, and its plugins cannot touch the prompt, so recall is not automatic there: the model searches mem0 itself, following an always-active skill.
+
+1. In fennec, Settings > **MCP** > **New server**: name `mem0`, URL `https://litellm.nas.iks-homelab.ovh/mcp/mem0`, transport streamable HTTP, authentication token = the value of `MEM0_LITELLM_KEY`. **Connect** must list `mem0-search_memories`, `mem0-add_memory`, `mem0-delete_memory`, `mem0-list_memories` and `mem0-memory_history`. Turn it **On**.
+2. Run `just install-fennec`: it copies `adapters/fennec/skills/mem0/` to `~/.agents/skills/mem0/`.
+3. Settings > **Agents & skills**: make `mem0` an **always-active skill**. Only new sessions get it.
+
+The skill tells the model when to search (task start, before preference-dependent decisions), when to store (durable facts stated by the user only) and to announce every write in one line.
 
 ## Development
 
@@ -75,6 +85,7 @@ Use the Justfile recipes:
 - `just fmt`: formats the code.
 - `just check`: runs fmt check, lint, and test.
 - `just install`: installs the binary.
+- `just install-fennec`: installs the mem0 skill for fennec.
 
 ## Source and mirror
 

@@ -18,3 +18,8 @@ check:
 
 install:
     cargo install --path crates/mem0-recall
+
+# Install the mem0 skill for fennec (global skills directory).
+install-fennec:
+    mkdir -p ~/.agents/skills
+    cp -r adapters/fennec/skills/mem0 ~/.agents/skills/
